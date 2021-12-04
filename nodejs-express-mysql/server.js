@@ -11,9 +11,17 @@ var con = mysql.createConnection({
     database: config.db.database,
 });
 
+var cors = require('cors'); 
+
 const app = express();
 
 app.use(express.json());
+
+app.use(cors({
+    origin: '*'
+})); 
+
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`testing bar voyage db on port ${port}`);
@@ -24,10 +32,12 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/users", async (req, res) => {
-    res.json({ status: "getting users" });
+    // res.json({ status: "getting users" });
     con.query("SELECT * FROM users", function (err, result) {
         if (err) throw err;
         console.log(result);
+        res.json(result); 
+
     });
 });
 
