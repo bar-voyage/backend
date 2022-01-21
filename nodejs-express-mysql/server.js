@@ -85,25 +85,25 @@ app.post('/register', (req, res) => {
     })
 });
 
-app.get('/login', (req, res) => {
-    console.log(req.body)
+// app.get('/login', (req, res) => {
+//     console.log(req.body)
 
-    // TODO: figure out error checking for existing users 
-    var query = "SELECT COUNT(*) AS num_users FROM users WHERE email = \"" + req.body.email + "\" AND pass = \"" + req.body.password + "\";"
-    con.query(query, function (err, rows) {
+//     // TODO: figure out error checking for existing users 
+//     var query = "SELECT COUNT(*) AS num_users FROM users WHERE email = \"" + req.body.email + "\" AND pass = \"" + req.body.password + "\";"
+//     con.query(query, function (err, rows) {
 
-        if (err) throw err;
+//         if (err) throw err;
 
-        if (rows[0].num_users == 1) {
-            res.json({status: "login accepted"})
-        }
-        else {
-            res.json({status: "login failed"})
-        }
-    })
+//         if (rows[0].num_users == 1) {
+//             res.json({status: "login accepted"})
+//         }
+//         else {
+//             res.json({status: "login failed"})
+//         }
+//     })
 
 
-});
+// });
 
 module.exports = app;
 

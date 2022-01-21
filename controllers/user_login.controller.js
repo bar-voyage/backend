@@ -4,8 +4,6 @@ const getUserLogin = async (req, res, next) => {
    email = req.body.email
    password = req.body.password
     try {
-        console.log(email)
-        console.log(password)
         const result = await getUserLoginService(email, password)
         // return success/failure 
         // res.send(result)
