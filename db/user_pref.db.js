@@ -26,7 +26,6 @@ const userPrefDb = (user_pref, user_id) => {
             })
         });
     }
-    res.json(req.body)
 }
 
 module.exports = {

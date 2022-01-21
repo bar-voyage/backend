@@ -7,7 +7,6 @@ const postUserPref = async (req, res, next) => {
     try {
         await postUserPrefService(prefs, user_id).then(result => {
             res.sendStatus(200)
-                .send(result)
         });
         next()
          // res.sendStatus(200)
