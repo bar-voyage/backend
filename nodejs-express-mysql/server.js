@@ -63,15 +63,15 @@ app.post('/user-pref', (req, res) => {
     res.json(req.body)
 });
 
-app.get('/bars', async (req, res) => {
-    console.log(req.body)
-    res.json({ status: "getting bars" });
-    con.query("SELECT * FROM bar", function (err, result) {
-        if (err) throw err;
-        // con.end();
-        console.log(result);
-    });
-});
+// app.get('/bars', async (req, res) => {
+//     console.log(req.body)
+//     res.json({ status: "getting bars" });
+//     con.query("SELECT * FROM bar", function (err, result) {
+//         if (err) throw err;
+//         // con.end();
+//         console.log(result);
+//     });
+// });
 
 app.post('/register', (req, res) => {
     console.log(req.body)
