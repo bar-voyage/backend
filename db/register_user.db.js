@@ -1,6 +1,6 @@
 const config = require('../config')
 const mysql = require("mysql");
-const { query } = require('express');
+const util = require('util');
 
 
 var con = mysql.createConnection({
@@ -10,14 +10,17 @@ var con = mysql.createConnection({
     database: config.db.database,
 });
 
-const registerUserDb = (email, password) => {
-    //TODO: Should probably check that the user id is valid, that the categories are valid, etc
-    //TODO: Better error responses
+const query = util.promisify(con.query).bind(con);
+
+const registerUserDb = async(email, password) => {
+
+    const existingUserFound = await query("SELECT COUNT(*) AS num_users FROM users WHERE email = \"" + email + "\" AND pass = \"" + password + "\";")
+    if (existingUserFound[0].num_users != 0) return 0
+
+    await query("INSERT INTO users (email, pass) VALUES (\"" + email + "\", \"" + password + "\");")
     
-    query("INSERT INTO users (email, password) VALUES (" + email + ", " + password + ");")
-    
-    const newUserFound = query("SELECT COUNT(*) AS num_users FROM users WHERE email = \"" + email + "\" AND pass = \"" + password + "\";")
-    if (newUserFound == 1) return 1
+    const newUserFound = await query("SELECT COUNT(*) AS num_users FROM users WHERE email = \"" + email + "\" AND pass = \"" + password + "\";")
+    if (newUserFound[0].num_users == 1) return 1
     else return 0
 }
 
