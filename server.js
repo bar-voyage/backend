@@ -2,12 +2,8 @@ const { application } = require("express");
 const express = require("express");
 const mysql = require("mysql");
 const config = require("./config");
-
 const routes = require('./routes');
-
-app.use(cors({
-    origin: '*'
-}));
+const cors = require("cors");
 
 var con = mysql.createConnection({
     host: config.db.host,
@@ -17,6 +13,10 @@ var con = mysql.createConnection({
 });
 
 const app = express();
+
+app.use(cors({
+    origin: '*'
+}));
 
 app.use(express.json());
 const port = process.env.PORT || 3000;
