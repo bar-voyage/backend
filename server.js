@@ -5,6 +5,9 @@ const config = require("./config");
 
 const routes = require('./routes');
 
+app.use(cors({
+    origin: '*'
+}));
 
 var con = mysql.createConnection({
     host: config.db.host,
