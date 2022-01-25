@@ -11,9 +11,9 @@ const router = express.Router()
 
 router.post('/user-pref', postUserPref)
 router.get('/bars', getAllBars)
-router.get('/login', getUserLogin)
+router.post('/login', getUserLogin)
 router.post('/register', postRegisterUser)
 router.post('/rating', postRating)
-router.get('/rec_bars', getRecBars)
+router.post('/rec_bars', getRecBars)
 
 module.exports = router
