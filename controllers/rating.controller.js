@@ -1,7 +1,6 @@
 const { postRatingService } = require('../services/rating.service')
 
 const postRating = async (req, res, next) => {
-
     try {
         await postRatingService(req.body.bar_id, req.body.num_stars).then(result => {
             res.sendStatus(200)
