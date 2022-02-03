@@ -1,15 +1,18 @@
-# importing the requests library
+# karaoke
+
+# import required libraries
 import requests
 import json
 import mysql.connector
 import os
-
 from dotenv import load_dotenv
-from pathlib import Path
 
-client_id = 'su_I7EgiWUkgGtErzncvtg'
-api_key = 'IXccQhiUVYME-6ch4uN95vl0Wg6g_IYeGIJrgXOTZD5EeMJXEYNgBjlCchRQMEnVmgJkfs9EYlQdboh_R6OFPYHpOe4-fMH5Xx4klVorQN_Y6rSY_5eiJSp2A1f0YXYx'
-URL = "https://api.yelp.com/v3/businesses/search?location=\"Washington DC\"&categories=sportsbars"
+# get ENV variables
+my_env = load_dotenv(dotenv_path='../.env')
+
+client_id = os.environ['YELP_CLIENT_ID']
+api_key = os.environ['YELP_API_KEY']
+URL = "https://api.yelp.com/v3/businesses/search?location=\"Washington DC\"&categories=karaoke"
 
 
 # authentication
@@ -22,13 +25,12 @@ r = requests.get(url = URL, headers = HEADERS)
 # extracting data in json format
 data = r.json()
 
-with open('yelp_api_sports.json', 'w') as outfile:
+divebar_fpath = "./yelp_jsons/yelp_karaoke.json"
+
+with open(divebar_fpath, 'w') as outfile:
     json.dump(data, outfile)
 
-yelp_api_results = json.load(open("./yelp_api_sports.json"))
-
-# get ENV variables for SQL connection
-my_env = load_dotenv(dotenv_path='./.env')
+yelp_api_results = json.load(open(divebar_fpath))
 
 # connect to database
 con = mysql.connector.connect(user=os.environ['DB_USER'], 
@@ -47,10 +49,11 @@ for bars in yelp_api_results["businesses"]:
     con.commit()
 
     insert_categories = "INSERT IGNORE INTO bar_type (yelp_id, category_id) VALUES (%s, %s)"
-    # FIX ME: HARDCODED CAT ID FOR SPORTS
-    category_val = (bars['id'], 1)
+    # FIX ME: HARDCODED CAT ID FOR KARAOKE
+    category_val = (bars['id'], 3)
     sqlcursor.execute(insert_categories, category_val)
     con.commit()
 
 # close DB con
 con.close()
+
