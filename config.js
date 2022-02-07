@@ -3,7 +3,7 @@ require('dotenv').config()
 const env = process.env;
 
 const config = {
-    db: { /* don't expose password or any sensitive info, done only for demo */
+    db: {
         host: env.DB_HOST,
         user: env.DB_USER,
         password: env.DB_PASSWORD,
