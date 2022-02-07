@@ -14,7 +14,7 @@ var con = mysql.createConnection({
 const query = util.promisify(con.query).bind(con);
 
 const recBarsDb = async (user_id) => {
-    query_txt = "SELECT * FROM (bar JOIN bar_type ON bar.bar_id = bar_type.bar_id JOIN user_pref ON bar_type.category_id = user_pref.category_id) WHERE user_pref.user_id = " + user_id + ";"
+    query_txt = "SELECT * FROM (bar JOIN bar_type ON bar.yelp_id = bar_type.yelp_id JOIN user_pref ON bar_type.category_id = user_pref.category_id) WHERE user_pref.user_id = " + user_id + ";"
     return await query(query_txt);
 }
 
