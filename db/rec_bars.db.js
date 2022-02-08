@@ -15,7 +15,9 @@ const query = util.promisify(con.query).bind(con);
 
 const recBarsDb = async (user_id) => {
     query_txt = "SELECT * FROM (bar JOIN bar_type ON bar.yelp_id = bar_type.yelp_id JOIN user_pref ON bar_type.category_id = user_pref.category_id) WHERE user_pref.user_id = " + user_id + ";"
-    return await query(query_txt);
+    const res = await query(query_txt);
+    console.log('recs length', res.length);
+    return res;
 }
 
 /* from https://stackoverflow.com/questions/44004418/node-js-async-await-using-with-mysql 
