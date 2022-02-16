@@ -14,15 +14,15 @@ var con = mysql.createConnection({
 
 const query = util.promisify(con.query).bind(con);
 
-const uploadPhotoDb = async (bar_id, user_id, photo) => {
+const uploadPhotoDb = async (bar_id, user_id, photo, phototype, filename) => {
     //TODO: Should probably check that the bar id is valid
-    var fileName = bar_id + '/' + photo.originalname
-    var path = photo.path
-    var url = baseUrl + fileName
+    
+    var path = bar_id + '/' + filename
+    var url = baseUrl + path
     var query_txt = `INSERT INTO content (bar_id, user_id, content_type, content_url) VALUES (${bar_id}, ${user_id}, 1, \'${url}\');`;
     
     //FIXME: make sure there's no error on these calls
-    s3Upload(path, photo.type, fileName);    
+    s3Upload(photo, path, phototype);    
     await query(query_txt)
 
     return 1;
