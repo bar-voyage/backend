@@ -18,11 +18,15 @@ app.use(cors({
     origin: '*'
 }));
 
-app.use(express.json());
+//app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`testing bar voyage db on port ${port}`);
 });
+
 
 app.use('/', routes) // routes is our routes file above
 

@@ -10,6 +10,8 @@ const { postRating } = require('../controllers/rating.controller')
 const { getRecBars } = require('../controllers/rec_bars.controller')
 const { uploadPhoto } = require('../controllers/upload_photo.controller')
 const { getPhotos } = require('../controllers/get_photos.controller')
+const { setContentView } = require('../controllers/set_content_view.controller')
+const { getContentView } = require('../controllers/get_content_view.controller')
 
 const router = express.Router()
 
@@ -21,5 +23,7 @@ router.post('/rating', postRating)
 router.post('/rec_bars', getRecBars)
 router.post('/upload_photo', upload.single('photo'),uploadPhoto)
 router.post('/get_photos', getPhotos)
+router.post('/set_content_view', setContentView)
+router.post('/get_content_view', getContentView)
 
 module.exports = router

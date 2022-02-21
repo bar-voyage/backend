@@ -4,7 +4,10 @@ const multer = require('multer');
 
 const uploadPhoto = async (req, res, next) => {
     try {
-        await uploadPhotoService(req.body.bar_id, req.body.user_id, req.file).then(result => {
+        console.log(req.body.phototype)
+        console.log(req.body.user_id)
+        console.log(req.body.bar_id)
+        await uploadPhotoService(req.body.bar_id, req.body.user_id, req.body.photo, req.body.phototype, req.body.filename).then(result => {
             res.sendStatus(200)
         });
         next()
