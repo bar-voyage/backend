@@ -13,6 +13,8 @@ const { getPhotos } = require('../controllers/get_photos.controller')
 const { setContentView } = require('../controllers/set_content_view.controller')
 const { getContentView } = require('../controllers/get_content_view.controller')
 
+const { changePass } = require('../controllers/change_pass.controller')
+
 const router = express.Router()
 
 router.post('/user-pref', postUserPref)
@@ -25,5 +27,7 @@ router.post('/upload_photo', upload.single('photo'),uploadPhoto)
 router.post('/get_photos', getPhotos)
 router.post('/set_content_view', setContentView)
 router.post('/get_content_view', getContentView)
+
+router.post('/change_pass', changePass)
 
 module.exports = router
