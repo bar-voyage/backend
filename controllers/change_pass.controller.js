@@ -5,9 +5,14 @@ const changePass = async (req, res, next) => {
    new_pass = req.body.new_pass
 
     try {
-        await changePassService(user_id, new_pass).then(result =>
-            res.sendStatus(200)
-        )
+        await changePassService(user_id, new_pass).then(result => {
+            if(result == -1) {
+                res.sendStatus(400)
+            }
+            else {
+                res.sendStatus(200) 
+            }
+        })
         next()
     }
     catch (e) {
