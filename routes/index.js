@@ -12,6 +12,7 @@ const { uploadPhoto } = require('../controllers/upload_photo.controller')
 const { getPhotos } = require('../controllers/get_photos.controller')
 const { setContentView } = require('../controllers/set_content_view.controller')
 const { getContentView } = require('../controllers/get_content_view.controller')
+const { getPastBars } = require('../controllers/get_past_bars.controller')
 
 const router = express.Router()
 
@@ -25,5 +26,6 @@ router.post('/upload_photo', upload.single('photo'),uploadPhoto)
 router.post('/get_photos', getPhotos)
 router.post('/set_content_view', setContentView)
 router.post('/get_content_view', getContentView)
+router.post('/past_bars', getPastBars)
 
 module.exports = router
