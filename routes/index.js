@@ -14,6 +14,7 @@ const { setContentView } = require('../controllers/set_content_view.controller')
 const { getContentView } = require('../controllers/get_content_view.controller')
 
 const { changePass } = require('../controllers/change_pass.controller')
+const { changeEmail } = require('../controllers/change_email.controller')
 
 const router = express.Router()
 
@@ -29,5 +30,6 @@ router.post('/set_content_view', setContentView)
 router.post('/get_content_view', getContentView)
 
 router.post('/change_pass', changePass)
+router.post('/change_email', changeEmail)
 
 module.exports = router
