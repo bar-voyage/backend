@@ -2,7 +2,7 @@ const { changeEmailService } = require('../services/change_email.service')
 
 const changeEmail = async (req, res, next) => {
    user_id = req.body.user_id
-   new_email = req.body.new_pass
+   new_email = req.body.new_email
 
     try {
         await changeEmailService(user_id, new_email).then(result => {
