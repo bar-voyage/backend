@@ -16,6 +16,7 @@ const { getPastBars } = require('../controllers/get_past_bars.controller')
 
 const { changePass } = require('../controllers/change_pass.controller')
 const { changeEmail } = require('../controllers/change_email.controller')
+// const { addPastBar } = require('../controllers/add_past_bar.controller')
 
 const router = express.Router()
 
@@ -33,5 +34,6 @@ router.post('/past_bars', getPastBars)
 
 router.post('/change_pass', changePass)
 router.post('/change_email', changeEmail)
+// router.post('/add_past_bar', addPastBar)
 
 module.exports = router

@@ -12,12 +12,12 @@ var con = mysql.createConnection({
 
 const query = util.promisify(con.query).bind(con);
 
-const registerUserDb = async(email, password) => {
+const registerUserDb = async(email, password, fname, lname) => {
 
     const existingUserFound = await query("SELECT COUNT(*) AS num_users FROM users WHERE email = \"" + email + "\" AND pass = \"" + password + "\";")
     if (existingUserFound[0].num_users != 0) return 0
 
-    await query("INSERT INTO users (email, pass) VALUES (\"" + email + "\", \"" + password + "\");")
+    await query("INSERT INTO users (email, pass, fname, lname) VALUES (\"" + email + "\", \"" + password + "\", \"" + fname + "\", \"" + lname + "\");")
     
     const newUserFound = await query("SELECT COUNT(*) AS num_users FROM users WHERE email = \"" + email + "\" AND pass = \"" + password + "\";")
     if (newUserFound[0].num_users == 1) return 1
