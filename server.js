@@ -11,7 +11,9 @@ var con = mysql.createConnection({
     password: config.db.password,
     database: config.db.database,
 });
-
+con.on('error', function(err){
+    console.log(err)
+})
 const app = express();
 
 app.use(cors({
