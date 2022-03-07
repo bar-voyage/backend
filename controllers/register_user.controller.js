@@ -5,9 +5,12 @@ const postRegisterUser = async (req, res, next) => {
     password = req.body.password;
     fname = req.body.fname;
     lname = req.body.lname;
+    age = req.body.age;
+    gender = req.body.gender;
+
     console.log(req.body)
     try {
-        result = await postRegisterUserService(email, password, fname, lname)
+        result = await postRegisterUserService(email, password, fname, lname, age, gender)
         if (result == 1) res.sendStatus(200)
         else res.sendStatus(500)
         // });
