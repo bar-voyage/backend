@@ -15,6 +15,10 @@ const userPrefDb = async (user_pref, user_id) => {
   //TODO: Should probably check that the user id is valid, that the categories are valid, etc
   //TODO: Better error responses
   console.log("user_pref", user_pref);
+
+  var rem_query = "DELETE FROM user_pref WHERE user_id = \"" + user_id + "\";";
+  await query(rem_query);
+  
   for (i = 0; i < user_pref.length; i++) {
     var text =
       'SELECT category_id FROM category WHERE category_name = "' + user_pref[i] + '";';
