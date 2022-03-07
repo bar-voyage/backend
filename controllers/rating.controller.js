@@ -4,7 +4,8 @@ const postRating = async (req, res, next) => {
     try {
         console.log(req.body.bar_id)
         console.log(req.body.num_stars)
-        await postRatingService(req.body.bar_id, req.body.num_stars).then(result => {
+        console.log(req.body.user_id)
+        await postRatingService(req.body.bar_id, req.body.num_stars, req.body.user_id).then(result => {
             res.sendStatus(200)
         });
         next()
