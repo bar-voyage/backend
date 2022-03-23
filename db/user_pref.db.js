@@ -25,12 +25,12 @@ const userPrefDb = async (user_pref, user_id) => {
     var result = await query(text);
     var rows = JSON.parse(JSON.stringify(result[0]));
     text =
-        "INSERT IGNORE INTO user_pref (user_id, category_id) VALUES (" +
+        "INSERT INTO user_pref (user_id, category_id) VALUES (" +
         user_id +
         ", " +
         rows.category_id +
         ");";
-      await query(text);
+     await query(text);
   }
 };
 
