@@ -8,7 +8,7 @@ const uploadFile = (photo_base64, filename, phototype) => {
 
     // Setting up S3 upload parameters
     const params = {
-        Bucket: s3_config.s3_config.bucket_name,
+        Bucket: s3_config.bucket_name,
         Key: filename, // File name you want to save as in S3
         Body: buf,
         ContentEncoding: 'base64',
@@ -21,7 +21,7 @@ const uploadFile = (photo_base64, filename, phototype) => {
         if (err) {
             throw err;
         }
-        // console.log(`File ${fileName} uploaded successfully. ${data.Location}`);
+        console.log(`File ${fileName} uploaded successfully. ${data.Location}`);
         // return data.Location
     });
 };
