@@ -16,8 +16,8 @@ const { getPastBars } = require('../controllers/get_past_bars.controller')
 
 const { changePass } = require('../controllers/change_pass.controller')
 const { changeEmail } = require('../controllers/change_email.controller')
-// const { addPastBar } = require('../controllers/add_past_bar.controller')
 const { setCurrBar } = require('../controllers/set_curr_bar.controller')
+const { getCurrBar } = require('../controllers/get_curr_bar.controller')
 
 const router = express.Router()
 
@@ -33,9 +33,9 @@ router.post('/set_content_view', setContentView)
 router.post('/get_content_view', getContentView)
 router.post('/past_bars', getPastBars)
 router.post('/set_current_bar', setCurrBar);
+router.post('/get_current_bar', getCurrBar);
 
 router.post('/change_pass', changePass)
 router.post('/change_email', changeEmail)
-// router.post('/add_past_bar', addPastBar)
 
 module.exports = router
