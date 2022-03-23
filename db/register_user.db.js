@@ -30,7 +30,7 @@ const registerUserDb = async(email, password, fname, lname, age, gender) => {
         age_range = "30+";
     }
 
-    await query("INSERT INTO users (email, pass, fname, lname, age, gender) VALUES (\"" + email + "\", \"" + password + "\", \"" + fname + "\", \"" + lname + "\", \"" + age_range + "\", \"" + gender + "\");");
+    await query("INSERT INTO users (email, pass, fname, lname, age, gender, content_viewable) VALUES (\"" + email + "\", \"" + password + "\", \"" + fname + "\", \"" + lname + "\", \"" + age_range + "\", \"" + gender + "\", 1);");
     
     const newUserFound = await query("SELECT COUNT(*) AS num_users FROM users WHERE email = \"" + email + "\" AND pass = \"" + password + "\";")
     if (newUserFound[0].num_users == 1) return 1
