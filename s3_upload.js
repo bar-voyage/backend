@@ -21,8 +21,6 @@ const uploadFile = (photo_base64, filename, phototype) => {
         if (err) {
             throw err;
         }
-        console.log(`File ${fileName} uploaded successfully. ${data.Location}`);
-        // return data.Location
     });
 };
 
