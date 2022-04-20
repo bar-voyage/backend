@@ -23,16 +23,14 @@ const ratingDb = async (bar_id, stars, user_id) => {
     // is there an existing rating? if yes, update it to be an average 
     var rating_table_get = "SELECT num_rates, stars FROM ratings WHERE bar_id=\""+ bar_id +"\" AND user_id=\"" + user_id + "\";" 
     // console.log(rating_table_get)
-    rates = await query(rating_table_get)
-    // console.log("result rates = " + rates)
-    // if (rates == ) console.log("unsucessful sql query")
-    if (rates > 0){
+    var result = await query(rating_table_get)
+
+    if (result != ''){
         // calculate avg
         console.log("rating exists")
-        num_user_ratings = rates[0].num_rates + 1
-        new_avg_user_rating = (rates[0].stars + stars)*1.0/(num_user_ratings)
-        console.log("new user rating avg: " + new_avg_user_rating)
-        var rating_update_query = "UPDATE ratings SET num_rates=\"" +num_user_ratings+ "\", stars=\"" +new_avg_user_rating+ "\" WHERE user_id=\"" + user_id + "\" AND bar_id=\"" + bar_id + "\";"
+        var rates = JSON.parse(JSON.stringify(result[0]))
+        num_user_ratings = rates.num_rates + 1
+        var rating_update_query = "UPDATE ratings SET num_rates=\"" +num_user_ratings+ "\", stars=\"" +stars+ "\" WHERE user_id=\"" + user_id + "\" AND bar_id=\"" + bar_id + "\";"
         update_query_result = await query(rating_update_query);
         if (update_query_result != 1){
             // unsuccessful update 
@@ -65,8 +63,8 @@ const ratingDb = async (bar_id, stars, user_id) => {
     console.log(rows.avg_stars)
     console.log("stars: " + stars)
     console.log("new rev count: " + new_review_count)
-    new_avg_stars = (rows.avg_stars + stars)*1.0 / new_review_count
-    console.log("new average stars: ", new_avg_stars)
+    new_avg_stars = (rows.avg_stars * (new_review_count - 1) + stars) / (new_review_count)
+console.log("new average stars: ", new_avg_stars)
         
     query_txt2 = "UPDATE bar SET avg_stars = " + new_avg_stars + ", review_count = " + new_review_count + " WHERE bar_id = \"" + bar_id + "\";"
     result2 = await query(query_txt2);
